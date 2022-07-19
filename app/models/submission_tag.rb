@@ -1,0 +1,2 @@
+class SubmissionTag < ApplicationRecord
+end
