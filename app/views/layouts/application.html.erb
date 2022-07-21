@@ -9,8 +9,66 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+ <body>
+  <header>
 
-  <body>
-    <%= yield %>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>Vコミュ</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+              <% if end_user_signed_in? %>
+
+              <%= link_to  "マイページ", end_user_path(current_end_user), class:"btn btn-outline-primary nav-link text-light" %>
+
+              <%= link_to "投稿一覧", submissions_path, class:"btn btn-outline-primary nav-link text-light" %>
+
+              <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete,  class:"btn btn-outline-primary nav-link text-light" %>
+
+
+             <% elsif admin_signed_in? %>
+
+             <%= link_to "投稿一覧", admin_submissions_path, class:"btn btn-outline-primary nav-link text-light" %>
+
+             <%=link_to "ユーザー一覧", admin_end_users_path, class:"btn btn-outline-primary nav-link text-light" %>
+
+             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-primary nav-link text-light" %>
+
+
+
+              <% else %>
+
+              <%= link_to "ホーム", root_path, class:"btn btn-outline-primary nav-link text-light" %>
+
+
+              <%= link_to "新規登録", new_end_user_registration_path, class:"btn btn-outline-primary nav-link text-light" %>
+
+              <%= link_to "ログイン", new_end_user_session_path, class:"btn btn-outline-primary nav-link text-light" %>
+
+              <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+     <%= yield %>
+    </main>
+
+    <footer>
+     <div class='container mt-5'>
+  	   <div class='row'>
+    	   <div class='mx-auto'>
+    	    	<p></p>
+       	 </div>
+       </div>
+     </div>
+    </footer>
   </body>
 </html>

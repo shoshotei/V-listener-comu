@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   sessions: 'end_user/sessions'
 }
 
-  namespace :public do
+  scope module: :public do
    root to:'homes#top'
    get "/homes" => "homes#top"
    resources :end_users,   only:[:show, :edit, :update]
    resources :submissions do
-   resources :comments, only:[:create]
+   resources :comments,    only:[:create]
    end
    resources :favorites,   only:[:index]
 
