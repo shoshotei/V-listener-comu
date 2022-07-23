@@ -21,13 +21,13 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-              <% if end_user_signed_in? %>
+             <% if end_user_signed_in? %>
 
-              <%= link_to  "マイページ", end_user_path(current_end_user), class:"btn btn-outline-primary nav-link text-light" %>
+             <%= link_to  "マイページ", end_user_path(current_end_user), class:"btn btn-outline-primary nav-link text-light" %>
 
-              <%= link_to "投稿一覧", submissions_path, class:"btn btn-outline-primary nav-link text-light" %>
+             <%= link_to "投稿一覧", submissions_path, class:"btn btn-outline-primary nav-link text-light" %>
 
-              <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete,  class:"btn btn-outline-primary nav-link text-light" %>
+             <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete,  class:"btn btn-outline-primary nav-link text-light" %>
 
 
              <% elsif admin_signed_in? %>
@@ -39,11 +39,9 @@
              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-primary nav-link text-light" %>
 
 
-
               <% else %>
 
               <%= link_to "ホーム", root_path, class:"btn btn-outline-primary nav-link text-light" %>
-
 
               <%= link_to "新規登録", new_end_user_registration_path, class:"btn btn-outline-primary nav-link text-light" %>
 

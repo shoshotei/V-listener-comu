@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   sessions: 'end_user/sessions'
 }
 
-  scope module: :public do
+  scope module: :end_user do
    root to:'homes#top'
    get "/homes" => "homes#top"
    resources :end_users,   only:[:show, :edit, :update]
