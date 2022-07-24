@@ -9,6 +9,7 @@ class EndUser::SubmissionsController < ApplicationController
     @submission = Submission.find(params[:id])
     @end_user = @submission.end_user
     @newsubmission = Submission.new
+    @comment = Comment.new
   end
 
   def new
@@ -19,7 +20,7 @@ class EndUser::SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
     @submission.end_user_id = current_end_user.id
     if@submission.save
-    redirect_to public_submission_path(@submission)
+    redirect_to submission_path(@submission)
 
     else
       @submissions = Submission.all
@@ -29,17 +30,32 @@ class EndUser::SubmissionsController < ApplicationController
   end
 
   def edit
+    @submission = Submission.find(params[:id])
+    if @submission.end_user == current_end_user
+     render "edit"
+    else
+     redirect_to submissions_path
+    end
   end
 
   def update
+    @submission = Submission.find(params[:id])
+    if @submission.update(submission_params)
+     redirect_to submission_path(@submission.id)
+    else
+     render :edit
+    end
   end
 
   def destroy
+    @submission = Submission.find(params[:id])
+    @submission.destroy
+    redirect_to submissions_path
   end
 
   private
 
   def submission_params
-    params.require(:submission).permit(:body)
+    params.require(:submission).permit(:body, :image)
   end
 end

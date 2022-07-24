@@ -8,22 +8,30 @@
        <table class="table">
          <tbody>
            <tr>
+             <td>
+               <%= image_tag @submission.get_image(200, 200) %>
+             </td>
+           </tr>
 
+             <tr>
              <td>
                <%= link_to @end_user.name, end_user_path(@end_user) %>
-             </td>
-             <td>
-                 <%= link_to @book.title, book_path %>
             </td>
-             <td><%= @book.body %></td>
+            </tr>
+
+            <tr>
+             <td><%= @submission.body %></td>
+             </tr>
+
+             <tr>
              <td>
-              <% if @book.user == current_user %>
-              <%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-success btn-sm" %>
+              <% if @submission.end_user == current_end_user %>
+              <%= link_to "投稿を編集", edit_submission_path(@submission.id), class:"btn btn-success btn-sm" %>
               <% end %>
              </td>
              <td>
-              <% if @book.user == current_user %>
-               <%= link_to "Destroy", book_path(@book.id), class:"btn btn-danger btn-sm", method: :delete, "data-confirm" => "本当に消しますか？" %>
+              <% if @submission.end_user == current_end_user %>
+               <%= link_to "投稿を削除", submission_path(@submission.id), class:"btn btn-danger btn-sm", method: :delete, "data-confirm" => "本当に消しますか？" %>
               <% end %>
              </td>
            </tr>

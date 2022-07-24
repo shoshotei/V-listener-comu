@@ -14,10 +14,10 @@
      <tr>
       <td>
         <%= link_to submission_path(submission.id) do %>
-         <%= image_tag submission.get_image %>
+         <%= image_tag submission.get_image(100, 100) %>
         <% end %>
 
-        <%= link_to @end_user.name, end_user_path %>
+        <%= link_to submission.end_user.name, end_user_path(submission.end_user) %>
       </td>
       <td><%= submission.body %></td>
      </tr>

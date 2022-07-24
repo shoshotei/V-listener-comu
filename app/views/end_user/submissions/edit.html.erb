@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>投稿編集</h1>
+
+      <%= form_with model: @submission do |f| %>
+
+
+
+      <div class="form-group">
+
+        <label for="inputImage">画像</label>
+        <%= f.file_field :image, accept: "image/*" %>
+
+        <label for="inputBody">本文</label></br>
+        <%= f.text_area :body, id:"inputBody" %>
+      </div>
+
+      <%= f.submit "変更内容を保存する", class:"btn btn-success btn-sm" %>
+      <% end %>
+
+      <a class="book_show">
+        <%= link_to "戻る", submission_path(@submission.id) %>
+      </a>
+      |
+      <a class="back">
+        <%= link_to "一覧に戻る", submissions_path %>
+      </a>
+
+
+    </div>
+  </div>
+</div>
