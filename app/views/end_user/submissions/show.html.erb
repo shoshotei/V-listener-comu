@@ -37,6 +37,21 @@
            </tr>
          </tbody>
        </table>
+
+       <%= form_with model: [@image, @submission] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+       <% end %>
+
+       <div>
+        <p>コメント件数：<%= @submission.comments.count %></p>
+        
+          <%= @submission.comments.each do |comment| %>
+           <p><%= image_tag comment.end_user.get_profile_image(100,100) %></p>
+           <%= comment.end_user.name %>
+           <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+          <% end %>
+       </div>
      </div>
   </div>
 </div>

@@ -5,17 +5,16 @@ Rails.application.routes.draw do
   sessions: 'end_user/sessions'
 }
 
-  scope module: :end_user do
+ scope module: :end_user do
    root to:'homes#top'
    get "/homes" => "homes#top"
    resources :end_users,   only:[:show, :edit, :update]
    resources :submissions do
-   resources :comments,    only:[:create]
+     resources :comments,    only:[:create]
+     resource :favorites,   only:[:create, :destroy]
    end
-   resources :favorites,   only:[:index]
 
-
-  end
+ end
 
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
