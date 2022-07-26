@@ -10,8 +10,8 @@ Rails.application.routes.draw do
    get "/homes" => "homes#top"
    resources :end_users,   only:[:show, :edit, :update]
    resources :submissions do
-     resources :comments,    only:[:create]
-     resource :favorites,   only:[:create, :destroy]
+     resources :comments,    only:[:create, :destroy]
+     resource :favorites,    only:[:create, :destroy]
    end
 
  end

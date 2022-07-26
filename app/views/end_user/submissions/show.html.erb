@@ -38,19 +38,48 @@
          </tbody>
        </table>
 
-       <%= form_with model: [@image, @submission] do |f| %>
+       <div>
+        <% if @submission.favorited_by?(current_end_user) %>
+          <p>
+            <%= link_to submission_favorites_path(@submission), method: :delete do %>
+              ♥<%= @submission.favorites.count %> いいね
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to submission_favorites_path(@submission), method: :post do %>
+              ♡<%= @submission.favorites.count %> いいね
+            <% end %>
+          </p>
+        <% end %>
+       </div>
+
+       <div>
+       <%= form_with model: [@submission, @comment] do |f| %>
         <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
+        <%= f.submit "送信する", class:"btn btn-success btn-sm" %>
        <% end %>
+       </div>
 
        <div>
         <p>コメント件数：<%= @submission.comments.count %></p>
-        
-          <%= @submission.comments.each do |comment| %>
-           <p><%= image_tag comment.end_user.get_profile_image(100,100) %></p>
-           <%= comment.end_user.name %>
-           <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+
+        <table class="table table-hover table-inverse">
+         <tbody>
+          <% @submission.comments.each do |comment| %>
+          <tr>
+           <td><%= link_to comment.end_user.name, end_user_path(@end_user) %></td>
+           <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+           <td><%= comment.comment %></td>
+           <td>
+             <% if comment.end_user == current_end_user %>
+              <%= link_to "削除", submission_comment_path(comment.submission, comment), method: :delete %>
+             <% end %>
+            </td>
+          </tr>
           <% end %>
+         </table>
+        </div>
        </div>
      </div>
   </div>
