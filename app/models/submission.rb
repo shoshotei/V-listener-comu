@@ -16,4 +16,22 @@ class Submission < ApplicationRecord
   def favorited_by?(end_user)
     favorites.exists?(end_user_id: end_user.id)
   end
+
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @submission = Submission.where("body LIKE?","#{word}")
+
+    elsif search == "forward_match"
+      @submission = Submission.where("body LIKE?","#{word}%")
+
+    elsif search == "backward_match"
+      @submission = Submission.where("body LIKE?","%#{word}")
+
+    elsif search == "partial_match"
+      @submission = Submission.where("body LIKE?","%#{word}%")
+
+    else
+      @submission = Submission.all
+    end
+  end
 end
