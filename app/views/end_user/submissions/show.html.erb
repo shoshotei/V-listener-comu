@@ -21,7 +21,15 @@
 
             <tr>
              <td><%= @submission.body %></td>
-             </tr>
+            </tr>
+
+            <tr>
+             <td>
+              <% @submission.tags.each do |tag| %>
+               <%= tag.name %>
+              <% end %>
+             </td>
+            </tr>
 
              <tr>
              <td>

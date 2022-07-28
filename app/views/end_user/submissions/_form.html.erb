@@ -30,6 +30,10 @@
   <label for="opinion">本文</label></br>
   <%= f.text_area :body %></br>
 
+ <label for="tag">タグ</label></br>
+  <%= f.fields_for :submission_tags do |ff| %>
+     <%= ff.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  <% end %></br>
 
 
   <%= f.submit '投稿', class:"btn btn-success btn-sm" %>

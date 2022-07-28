@@ -6,7 +6,15 @@
 
   <div class="col-md-8 offset-md-1">
   <h2>投稿一覧</h2>
-
+    <%= form_tag submissions_path, method: :get, class: 'boards__searchForm' do %>
+      <%= select_tag :tag_id,
+                     options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                     {
+                       prompt: 'タグで絞り込み検索',
+                       onchange: 'submit(this.form);'
+                     }
+      %>
+    <% end %>
   <table class="table table-hover table-inverse">
 
     <tbody>
@@ -20,6 +28,13 @@
         <%= link_to submission.end_user.name, end_user_path(submission.end_user) %>
       </td>
       <td><%= submission.body %></td>
+
+      <td>
+        <% submission.tags.each do |tag| %>
+         <%= tag.name %>
+        <% end %>
+      </td>
+
      </tr>
      <% end %>
     </tbody>

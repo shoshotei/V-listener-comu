@@ -2,9 +2,11 @@ class Submission < ApplicationRecord
 
   has_one_attached :image
   belongs_to :end_user
-  has_many :comments,  dependent: :destroy
-  has_many :favorites, dependent: :destroy
-
+  has_many :comments,        dependent: :destroy
+  has_many :favorites,       dependent: :destroy
+  has_many :submission_tags, dependent: :destroy
+  has_many :tags,            through: :submission_tags
+  
    def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
