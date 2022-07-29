@@ -14,3 +14,8 @@ Tag.create([
     { name: '個人勢'},
     { name: 'その他'}
     ])
+    
+Admin.create!(
+    email: 'admin@admin',
+    password: 'otsudaruva',
+)

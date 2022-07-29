@@ -1,0 +1,44 @@
+<div class="container px-5 px-sm-0">
+ <div class='row'>
+  <div class="col-md-10 offset-md-1">
+   <h2>投稿一覧</h2>
+    <table class="table table-hover table-inverse">
+
+    <thead>
+      <tr>
+        <th>投稿画像</th>
+        <th>ユーザー名</th>
+        <th>投稿文</th>
+        <th>タグ</th>
+      </tr>
+    </thead>
+
+    <tbody>
+     <% @submissions.each do |submission| %>
+     <tr>
+      <td>
+        <%= link_to submission_path(submission.id) do %>
+         <%= image_tag submission.get_image(100, 100) %>
+        <% end %>
+      </td>
+      
+      <td>
+        <%= link_to submission.end_user.name, end_user_path(submission.end_user) %>
+      </td>
+      
+      <td><%= submission.body %></td>
+
+      <td>
+        <% submission.tags.each do |tag| %>
+         <%= tag.name %>
+        <% end %>
+      </td>
+
+     </tr>
+     <% end %>
+    </tbody>
+
+  </table>
+  </div>
+ </div>
+</div>
