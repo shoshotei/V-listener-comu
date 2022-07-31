@@ -43,7 +43,7 @@
            <td><%= link_to comment.end_user.name, admin_end_user_path(@end_user) %></td>
            <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
            <td><%= comment.comment %></td>
-           <td><%= link_to "削除", admin_submission_comment_path(comment.submission, comment), method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+           <td><%= link_to "削除", admin_submission_comment_path(comment.submission, comment), class:"btn btn-danger btn-sm", method: :delete, "data-confirm" => "本当に消しますか？" %></td>
           </tr>
           <% end %>
          </table>

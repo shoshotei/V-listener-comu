@@ -8,16 +8,18 @@
        <tr>
          <th></th>
          <th>ユーザー名</th>
-         <th></th>
+         <th>ステータス</th>
        </tr>
      </thead>
      <tbody>
        <% @end_users.each do |end_user| %>
        <tr>
          <td><%= image_tag end_user.get_profile_image %></td>
-         <td><%= end_user.name %></td>
+         <td><%= link_to end_user.name, admin_end_user_path(end_user.id) %></td>
          <td>
-          <%= link_to "ユーザー詳細ページへ", admin_end_user_path(end_user.id) %>
+         <% if end_user.is_deleted == true %>退会
+          <% else %>有効
+         <% end %>
          </td>
        </tr>
        <% end %>

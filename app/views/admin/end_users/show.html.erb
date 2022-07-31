@@ -1,12 +1,39 @@
 <div class="container px-5 px-sm-0">
  <div class="row">
   <div class="col-md-10 offset-md-1">
-       
-       
-  <h2><%= @end_user.name %>　の投稿一覧</h2>
+
+  <h2><%= @end_user.name %>さんの詳細</h2>
+   <table class="table">
+     <tr>
+      <td><%= image_tag @end_user.get_profile_image %></td>
+     </tr>
+
+     <tr>
+      <th>ユーザー名</th>
+      <td><%= @end_user.name %></td>
+     </tr>
+
+     <tr>
+      <th>自己紹介文</th>
+      <td><%= @end_user.introduction %></td>
+     </tr>
+
+     <tr>
+      <th>ステータス</th>
+      <td>
+       <% if @end_user.is_deleted == true %>退会
+        <% else %>有効
+       <% end %>
+      </td>
+     </tr>
+   </table>
+
+   <p><%= link_to "ステータスを変更する", edit_admin_end_user_path(@end_user), class:"btn btn-danger btn-sm" %></p>
+
+  <h2><%= @end_user.name %>さんの投稿一覧</h2>
 
   <table class="table table-hover table-inverse">
-    
+
     <tbody>
       <% @submissions.each do |submission| %>
       <tr>
