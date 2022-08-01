@@ -1,0 +1,22 @@
+<h2>いいね一覧</h2>
+<table class="table table-hover table-inverse">
+  <tbody>
+<% @favorite.each do |favorite| %>
+<tr>
+  <td>
+    <%= link_to submission_path(submission.id) do %>
+     <%= image_tag favorite.submission.get_image(100, 100) %>
+    <% end %>
+
+    <%= link_to favorite.submission.end_user.name, end_user_path(submission.end_user) %>
+  </td>
+  <td><%= favorite.submission.body %></td>
+  <td>
+    <% favorite.submission.tags.each do |tag| %>
+     <%= tag.name %>
+    <% end %>
+  </td>
+</tr>
+<% end %>
+  </tbody>
+</table>
