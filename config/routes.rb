@@ -8,8 +8,12 @@ Rails.application.routes.draw do
  scope module: :end_user do
    root to:'homes#top'
    get "/homes" => "homes#top"
-   resources :end_users,   only:[:index, :show, :edit, :update]
-   get "/end_users/favorite" => "end_users#favorite"
+   resources :end_users, only:[:index, :show, :edit, :update] do
+     member do
+      get :favorites
+     end
+   end
+   #get "/end_users/favorites" => "end_users#favorites"
    resources :submissions do
      resources :comments,    only:[:create, :destroy]
      resource :favorites,    only:[:create, :destroy]

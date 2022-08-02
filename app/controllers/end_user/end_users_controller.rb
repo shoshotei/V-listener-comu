@@ -30,9 +30,9 @@ class EndUser::EndUsersController < ApplicationController
     end
   end
 
-  def favorite
-    @end_user = EndUser.find(params[:id])
-    @favorite = Favorite.where(end_user: @end_user.id)
+  def favorites
+    @end_user = EndUser.find_by(id: params[:id])
+    @favorites = Favorite.where(end_user: @end_user.id)
   end
 
   private
