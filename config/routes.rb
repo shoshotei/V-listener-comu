@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   sessions: 'end_user/sessions'
 }
 
+
+
  scope module: :end_user do
+   post '/guests/guest_sign_in', to: 'guests#new_guest'
    root to:'homes#top'
    get "/homes" => "homes#top"
    resources :end_users, only:[:index, :show, :edit, :update] do
@@ -26,7 +29,7 @@ Rails.application.routes.draw do
 }
 
 namespace :admin do
-  get "homes" => "homes#top"
+ get "homes" => "homes#top"
  resources :end_users,   only:[:index, :show, :edit, :update]
  resources :submissions, only:[:index, :show, :destroy] do
   resources :comments,    only:[:destroy]
