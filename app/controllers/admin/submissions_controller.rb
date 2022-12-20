@@ -1,4 +1,5 @@
 class Admin::SubmissionsController < ApplicationController
+ before_action :authenticate_admin!
 
  def index
    @submissions = Submission.all
